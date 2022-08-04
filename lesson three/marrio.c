@@ -6,9 +6,9 @@ int main(){
 
     do{
         printf("Please enter a height: ");
-        scanf("%d", height);
+        scanf("%d", &height);
     }while (height < 1);
-    
+
     for (int line = 0; line < height; line++)
     {
 
