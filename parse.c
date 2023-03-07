@@ -1,14 +1,20 @@
 #include <stdio.h>
 #include <string.h>
 
+char newstring[900];
+
 char parser(char myString[],int string_size){
 
     for (size_t i = 0; i < string_size; i++)
     {
         if(myString[i] == ' '){
-            myString[i] = '\n';
+            newstring[i] = '\n';
         }
-        printf("%c",myString[i]);
+        else{
+            newstring[i] = myString[i];
+        }
+
+        printf("%c",newstring[i]);
     }
     
 }
