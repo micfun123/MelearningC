@@ -3,10 +3,13 @@
 
 char parser(char myString[],int string_size){
 
-    char *token;
     for (size_t i = 0; i < string_size; i++)
     {
-        printf("%c\n",myString[i]);
+        if (myString[i] == ' ')
+        {
+            myString[i] = '\0';
+            printf("%s\n",myString[i]);
+        }
     }
     
     
