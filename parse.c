@@ -22,7 +22,7 @@ char parser(const char myString[]){
 
 void main(){
 
-    char myString[] = "Hello World! Hey    farther aka spider it works. Am i a good sun?";
+    char myString[] = "          Hello       World! Hey    farther aka spider            it works. Am i a good sun?";
     parser(myString);
 
 }
