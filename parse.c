@@ -8,6 +8,11 @@ char parser(const char myString[]){
             if(myString[i+1] == ' '){
                 continue;
             }
+            else if (myString[i+1]== '\0')
+            {
+               break;
+            }
+            
             else{
                 printf("\n",myString[i]);
             }
@@ -20,7 +25,7 @@ char parser(const char myString[]){
 
 void main(){
 
-    char myString[] = "          Hello       World! Hey    farther aka spider            it works. Am i a good sun?  ";
+    char myString[] = "          Hello       World! Hey    farther aka spider            it works. Am i a good sun?               ";
     parser(myString);
 
 }
