@@ -18,13 +18,37 @@ int main()
         exit(1);
     }
     char str[100]; //makes a arracy
-    fprintf(fptr2,"<html>\n<ul>\n");
+
+    int type = 0;
+    printf("Press 1 for ordered list and 0 for un un ordered list: ");
+    scanf("%d", &type);
+    if (type == 1)
+    {
+        fprintf(fptr2,"<html>\n<ol>\n");
+    }
+    else
+    {
+        fprintf(fptr2,"<html>\n<ul>\n");
+    }
+
     while (fgets(str, 100, fptr) != NULL) //copy file to array
     {
         fprintf(fptr2,"<li>%s</li>\n", str);//print array
     }
-    fprintf(fptr2,"</ul>\n</html>\n");
+    
+
+    if (type == 1)
+    {
+       fprintf(fptr2,"</ol>\n</html>\n");
+    }
+    else
+    {
+        fprintf(fptr2,"</ul>\n</html>\n");
+    }
+
     fclose(fptr);
     fclose(fptr2);
+    
+    
     return 0;
 }
