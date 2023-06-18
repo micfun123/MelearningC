@@ -19,6 +19,8 @@ int main()
         fprintf(fptr,"%s\n", str);
         printf("Do you want to continue? (1/0): ");
         scanf("%d", &write);
+        getchar();
+        
     }
     return 0;
 }
