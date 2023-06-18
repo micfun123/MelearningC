@@ -10,11 +10,15 @@ int main()
 
     fptr = fopen("file.txt", "r");
     fptr2 = fopen("file.html", "w");
-
+    if (!fptr2)
+    {
+        printf("Error No HTML output file!");
+        exit(1);
+    }
 
     if (fptr == NULL)
     {
-        printf("Error!");
+        printf("Error No TXT input file!");
         exit(1);
     }
     char str[100]; //makes a arracy
@@ -27,6 +31,7 @@ int main()
         printf("This is not a valid input for a choice.");
         exit(1);
     }
+
 
     fprintf(fptr2,"<html>\n<head>\n<title>HTML FILE</title>\n</head>\n<body>\n");
 
@@ -60,7 +65,6 @@ int main()
 
     fclose(fptr);
     fclose(fptr2);
-    
-    
+
     return 0;
 }
