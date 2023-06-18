@@ -22,13 +22,22 @@ int main()
     int type = 0;
     printf("Press 1 for ordered list and 0 for un un ordered list: ");
     scanf("%d", &type);
+    if (type != 1 && type != 0)
+    {
+        printf("This is not a valid input for a choice.");
+        exit(1);
+    }
+
+    fprintf(fptr2,"<html>\n<body>\n");
+
+
     if (type == 1)
     {
-        fprintf(fptr2,"<html>\n<ol>\n");
+        fprintf(fptr2,"<ol>\n");
     }
     else
     {
-        fprintf(fptr2,"<html>\n<ul>\n");
+        fprintf(fptr2,"<ul>\n");
     }
 
     while (fgets(str, 100, fptr) != NULL) //copy file to array
@@ -39,12 +48,15 @@ int main()
 
     if (type == 1)
     {
-       fprintf(fptr2,"</ol>\n</html>\n");
+       fprintf(fptr2,"</ol>");
     }
     else
     {
-        fprintf(fptr2,"</ul>\n</html>\n");
+        fprintf(fptr2,"</ul>");
     }
+
+
+    fprintf(fptr2,"\n</body>\n</html>\n");
 
     fclose(fptr);
     fclose(fptr2);
