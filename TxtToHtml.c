@@ -28,7 +28,7 @@ int main()
         exit(1);
     }
 
-    fprintf(fptr2,"<html>\n<body>\n");
+    fprintf(fptr2,"<html>\n<head>\n<title>HTML FILE</title>\n</head>\n<body>\n");
 
 
     if (type == 1)
