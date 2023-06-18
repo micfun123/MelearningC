@@ -18,10 +18,12 @@ int main()
         exit(1);
     }
     char str[100]; //makes a arracy
+    fprintf(fptr2,"<html>\n<ul>\n");
     while (fgets(str, 100, fptr) != NULL) //copy file to array
     {
-        fprintf(fptr2,"%s", str);
+        fprintf(fptr2,"<li>%s</li>\n", str);//print array
     }
+    fprintf(fptr2,"</ul>\n</html>\n");
     fclose(fptr);
     fclose(fptr2);
     return 0;
