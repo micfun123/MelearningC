@@ -3,15 +3,18 @@
 void reverse(char *str){
 
     int len = 0;
+    char reverse_str[100];
     while (str[len] != '\0')
     {
         len++;
     }
     printf("%d\n", len);
-    for (int i = len; i >= 0; i--)
+    for (int i = 0; i < len; i++)
     {
-        printf("%c", str[i]);
+        reverse_str[i] = str[len - i - 1];
     }
+    printf("%s\n", reverse_str);
+
     
 }
 
