@@ -9,9 +9,9 @@ void reverse(char *str){
         len++;
     }
     printf("%d\n", len);
-    for (int i = 0; i < len; i++)
+    for (int i = len; i >= 0; i--)
     {
-        reverse_str[i] = str[len - i - 1];
+        reverse_str[i - 1] = str[len - i];
     }
     printf("%s\n", reverse_str);
 
