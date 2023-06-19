@@ -13,6 +13,7 @@ void reverse(char *str){
     {
         reverse_str[i] = str[len - i - 1];
     }
+    reverse_str[len] = '\0';
     printf("%s\n", reverse_str);
 
     
