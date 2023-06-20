@@ -47,7 +47,12 @@
 
 void string_copy(char original[256], char copy[256])
 {
-    
+    int len = 0;
+    while (original[len] != '\0')
+    {
+        len++;
+    }
+    printf ("%d\n", len);
 }
 
 
