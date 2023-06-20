@@ -52,7 +52,15 @@ void string_copy(char original[256], char copy[256])
     {
         len++;
     }
-    printf ("%d\n", len);
+    printf ("String len is %d\n", len);
+    char* p = original;
+    char* q = copy;
+    for (int i = 0; i < len; i++){
+        *q = *p;
+        p++;
+        q++;        
+    }
+
 }
 
 
