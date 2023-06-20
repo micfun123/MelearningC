@@ -51,9 +51,7 @@ void string_copy(char original[256], char copy[256])
     char* q = copy;
     while (*p != '\0')
     {
-        *q = *p;
-        p++;
-        q++;
+        *q++ = *p++;
 
     }
 }
