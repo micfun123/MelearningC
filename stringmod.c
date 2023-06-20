@@ -47,20 +47,15 @@
 
 void string_copy(char original[256], char copy[256])
 {
-    int len = 0;
-    while (original[len] != '\0')
-    {
-        len++;
-    }
-    printf ("String len is %d\n", len);
     char* p = original;
     char* q = copy;
-    for (int i = 0; i < len; i++){
+    while (*p != '\0')
+    {
         *q = *p;
         p++;
-        q++;        
-    }
+        q++;
 
+    }
 }
 
 
