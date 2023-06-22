@@ -2,7 +2,17 @@
 
 void all_upper(char* str)
 {
-    // array of capital letters
+    // if str is empty, return
+    if (str == NULL) {
+        printf("NULL\n");
+        return;
+    }
+    if (str[0] == '\0') {
+        printf("Empty String\n");
+        return;
+    }
+
+    
     char capital[27] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
     char* p = str;
     int isUpper = 0;
@@ -30,6 +40,10 @@ int main()
     char str2[] = "Tea is drunk by Tea.";
     all_upper(str2);
     printf("%s\n", str2); // Should print "TEA IS DRUNK BY TEA."
+
+    char str3[] = ""; 
+    all_upper(str3);
+    printf("%s\n", str3); 
 
     return 0;
 }
