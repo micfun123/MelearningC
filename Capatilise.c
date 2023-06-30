@@ -16,10 +16,6 @@ void all_upper(char* str)
     while (*p != '\0') {
         if (*p >= 'a' && *p <= 'z') {
             if(*(p-1) == ' ') {
-                //if first letter of string
-                if (p == str) {
-                    *p = *p - 32;
-                }
                 *p = *p - 32;
             }
 
