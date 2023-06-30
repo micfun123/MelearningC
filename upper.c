@@ -12,23 +12,14 @@ void all_upper(char* str)
         return;
     }
 
-    
-    char capital[27] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
     char* p = str;
-    int isUpper = 0;
     while (*p != '\0') {
-        for (int i = 0; i < 27; i++) {
-            if (*p == capital[i]) {
-                isUpper = 1;
-                break;
-            }
+        if (*p >= 'a' && *p <= 'z') {
+            *p = *p - 32; 
         }
-        if (isUpper == 0) {
-            *p = *p - 32;
-        }
-        isUpper = 0;
         p++;
     }
+
 }
 
 int main()
