@@ -5,8 +5,10 @@ int len(char* str)
     int count = 0;
     while (*str != '\0') {
         if (*str == ' ') {
-            printf("%d ", count); 
-            count = 0;
+            if (count != 0) {
+                printf("%d ", count); 
+                count = 0;
+            }
         }
         else {
             count++;
@@ -18,9 +20,9 @@ int len(char* str)
 
 int main()
 {
-    char str1[] = "gargantua is drinking tea.";
+    char str1[] = "gargantua        is drinking tea.               ";
     len(str1);
-    char str2[] = "Tea is drunk by tea.";
+    char str2[] = "Tea is drunk by tea."; 
     len(str2);
     char str3[] = "";
     len(str3);
