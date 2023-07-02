@@ -8,9 +8,7 @@ int len(char* str)
     while (*str != '\0') {
         if (str == ignore) {
             str++;
-            continue;
         }
-
         for (int i = 0; i < 8; i++) {
             if (*str == ignore[i]) {
                 str++;
@@ -19,13 +17,11 @@ int len(char* str)
                     count = 0;
                 }
                 ignored = 1;
-                break;
             }
         }
         if (ignored == 1) {
             ignored = 0;
             str++;
-            continue;
         }
         else {
             count++;
