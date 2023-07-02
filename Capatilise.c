@@ -15,7 +15,7 @@ void all_upper(char* str)
     char* p = str;
     while (*p != '\0') {
         if (*p >= 'a' && *p <= 'z') {
-            if(*(p-1) == ' ' || p == str) {
+            if(p == str || *(p-1) == ' ') {
                 *p = *p - 32;
             }
         }
