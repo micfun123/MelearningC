@@ -2,25 +2,47 @@
 
 int len(char* str)
 {
+    char ignore[] = {' ', '\t', ',', '.', '!', '?', '\n'};
     int count = 0;
+    int ignored = 0;
     while (*str != '\0') {
-        if (*str == ' ') {
-            if (count != 0) {
-                printf("%d ", count); 
-                count = 0;
+        //count the length of each word , words are seperated by items in ignore
+
+        //if the first char is in ignore, skip it
+        if (str == ignore) {
+            str++;
+            continue;
+        }
+
+        for (int i = 0; i < 8; i++) {
+            if (*str == ignore[i]) {
+                str++;
+                if (count != 0) {
+                    printf("%d ", count);
+                    count = 0;
+                }
+                ignored = 1;
+                break;
             }
+        }
+        if (ignored == 1) {
+            ignored = 0;
+            str++;
+            continue;
         }
         else {
             count++;
+            str++;
         }
-        str++;
+
     }
     printf("%d\n", count); 
+    
 }
 
 int main()
 {
-    char str1[] = "gargantua        is drinking tea.               ";
+    char str1[] = "gargantua        is drinking tea.           ";
     len(str1);
     char str2[] = "Tea is drunk by tea."; 
     len(str2);
