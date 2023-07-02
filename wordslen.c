@@ -6,9 +6,6 @@ int len(char* str)
     int count = 0;
     int ignored = 0;
     while (*str != '\0') {
-        //count the length of each word , words are seperated by items in ignore
-
-        //if the first char is in ignore, skip it
         if (str == ignore) {
             str++;
             continue;
