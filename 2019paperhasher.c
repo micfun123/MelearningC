@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-//write a function to remove everything before the first dot in a string and everything after the next dot
+//write a function to remove everything before the first dot in a string and everything after the next dot add up the ascii values of the remaining characters and return the total (our hash)
 
 char mystring[100] = "WWW.OCR.ORG.UK";
 char mystring2[100] = "www.ocr.org.uk";
