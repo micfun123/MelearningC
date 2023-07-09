@@ -6,10 +6,8 @@ struct node
     int data;
     struct node *next;
 };
-
 struct node *head = NULL;
-struct node *one = NULL;
-struct node *two = NULL;
+
 
 
 int printList(struct node *n)
@@ -22,17 +20,23 @@ int printList(struct node *n)
     return 0;
 }
 
+int addNode(int data)
+{
+    struct node *new_node = (struct node *)malloc(sizeof(struct node));
+    new_node->data = data;
+    new_node->next = head;
+    head = new_node;
+    return 0;
+}
+
 void main(){
 
-    one = malloc(sizeof(struct node));
-    one->data = 1;
-    two = malloc(sizeof(struct node));
-    two->data = 2;
-    one -> next = two;
-    two -> next = NULL;
-    
+    addNode(1);
+    addNode(2);
+    addNode(3);
+    addNode(4);
+    addNode(5);
 
-    printList(one); 
-
+    printList(head);
 
 }
