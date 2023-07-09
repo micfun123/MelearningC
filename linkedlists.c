@@ -25,8 +25,20 @@ int addNode(int data)
 {
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->data = data;
-    newNode->next = head;
-    head = newNode;
+    newNode->next = NULL;
+    if (head == NULL)
+    {
+        head = newNode;
+    }
+    else
+    {
+        struct node *current = head;
+        while (current->next != NULL)
+        {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
 }
 
 int getNode(int index)
