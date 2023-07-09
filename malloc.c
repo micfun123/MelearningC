@@ -7,7 +7,7 @@ int main()
 	// This pointer will hold the
 	// base address of the block created
 	int* ptr;
-	int n = 1000, i;
+	int n = 100, i;
 
 	// Dynamically allocate memory using malloc()
 	ptr = (int*)malloc(n * sizeof(int));
@@ -32,8 +32,9 @@ int main()
 		printf("The elements of the array are: ");
 		for (i = 0; i < n; ++i) {
 			printf("%d, ", ptr[i]); // print the ith element of the array that stored in ptr (memory address)
+            
 		}
 	}
-
+    free(ptr);
 	return 0;
 }
