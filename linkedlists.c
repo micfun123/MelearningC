@@ -12,12 +12,12 @@ struct node *head = NULL;
 
 int printList(struct node *n)
 {
+    //print node from start
     while (n != NULL)
     {
-        printf(" %d ", n->data);
+        printf("%d ", n->data);
         n = n->next;
     }
-    return 0;
 }
 
 int addNode(int data)
@@ -28,6 +28,8 @@ int addNode(int data)
     head = new_node;
     return 0;
 }
+
+
 
 void main(){
 
