@@ -18,6 +18,7 @@ int printList(struct node *n)
         printf("%d ", n->data);
         n = n->next;
     }
+    printf("\n");
 }
 
 int addNode(int data)
@@ -44,6 +45,20 @@ int getNode(int index)
     return 0;
 }
 
+int editNode(int index, int data)
+{
+    struct node *current = head;
+    int count = 0;
+    while (current != NULL)
+    {
+        if (count == index)
+        {
+            current->data = data;
+        }
+        count++;
+        current = current->next;
+    }
+}
 
 void main(){
 
@@ -56,6 +71,10 @@ void main(){
     printList(head);
 
     
-    printf("The second node is %d", getNode(2));
+    printf("The second node is %d\n", getNode(2));
+    editNode(2, 10);
+    printf("The second node is %d\n", getNode(2));
+
+    printList(head);
 
 }
