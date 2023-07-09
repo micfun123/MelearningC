@@ -28,6 +28,22 @@ int addNode(int data)
     head = newNode;
 }
 
+int getNode(int index)
+{
+    struct node *current = head;
+    int count = 0;
+    while (current != NULL)
+    {
+        if (count == index)
+        {
+            return (current->data);
+        }
+        count++;
+        current = current->next;
+    }
+    return 0;
+}
+
 
 void main(){
 
@@ -38,5 +54,8 @@ void main(){
     addNode(5);
 
     printList(head);
+
+    
+    printf("The second node is %d", getNode(2));
 
 }
