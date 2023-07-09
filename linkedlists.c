@@ -80,7 +80,6 @@ void main(){
     addNode(4);
     addNode(5);
     addNode(6);
-    addNode(7);
     
 
     printList(head);
@@ -91,5 +90,8 @@ void main(){
     printf("The second node is %d\n", getNode(2));
 
     printList(head);
+
+    printf("The first node plus the second node is %d\n", getNode(0) + getNode(1));
+    
 
 }
