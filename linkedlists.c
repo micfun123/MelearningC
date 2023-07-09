@@ -74,24 +74,54 @@ int editNode(int index, int data)
 
 void main(){
 
-    addNode(1);
-    addNode(2);
-    addNode(3);
-    addNode(4);
-    addNode(5);
-    addNode(6);
-    
-
-    printList(head);
-
-    
-    printf("The second node is %d\n", getNode(2));
-    editNode(2, 10);
-    printf("The second node is %d\n", getNode(2));
-
-    printList(head);
-
-    printf("The first node plus the second node is %d\n", getNode(0) + getNode(1));
+    int exit = 1;
+    while (exit != 0)
+    {
+        printf("\n");
+        printf("1. Add Node\n");
+        printf("2. Get Node\n");
+        printf("3. Edit Node\n");
+        printf("4. Print List\n");
+        printf("0. Exit\n");
+        printf("Enter your choice: ");
+        int choice;
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            printf("Enter data: ");
+            int data;
+            scanf("%d", &data);
+            addNode(data);
+            break;
+        case 2:
+            printf("Enter index: ");
+            int index;
+            scanf("%d", &index);
+            printf("Node at index %d is %d\n", index, getNode(index));
+            break;
+        case 3:
+            printf("Enter index: ");
+            int index1;
+            scanf("%d", &index1);
+            printf("Enter data: ");
+            int data1;
+            scanf("%d", &data1);
+            editNode(index1, data1);
+            break;
+        case 4:
+            printList(head);
+            break;
+        case 0:
+            exit = 0;
+            break;
+        default:
+            printf("Invalid choice\n");
+            break;
+        }
+        printf("\n");
+        
+    }
     
 
 }
