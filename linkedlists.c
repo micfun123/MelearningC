@@ -79,6 +79,9 @@ void main(){
     addNode(3);
     addNode(4);
     addNode(5);
+    addNode(6);
+    addNode(7);
+    
 
     printList(head);
 
