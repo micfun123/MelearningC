@@ -1,46 +1,38 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-struct qurds {
-    char data;
-    int next;
+struct node
+{
+    int data;
+    struct node *next;
 };
 
-struct qurds locations[100] = {{'a', 1}, {'b', 2}, {'c', 3}, {'d', 4}, {'e', -1}};
+struct node *head = NULL;
+struct node *one = NULL;
+struct node *two = NULL;
 
-int read(int index)
+
+int printList(struct node *n)
 {
-    return locations[index].data;
-}
-
-int next(int index)
-{
-    return locations[index].next;
-}
-
-
-int add(int index, char data)
-{
-    int count = 0;
-    while (locations[count].next != -1) {
-        count++;
-    }
-    locations[count].data = data;
-    locations[count].next = index;
-    return count;
-}
-
-int main()
-{
-    int index = 0;
-    while (index != -1) {
-        printf("%c\n", read(index));
-        index = next(index);
-    }
-    printf("Adding f to the list\n");
-    index = add(index, 'f');
-    while (index != -1) {
-        printf("%c\n", read(index));
-        index = next(index);
+    while (n != NULL)
+    {
+        printf(" %d ", n->data);
+        n = n->next;
     }
     return 0;
+}
+
+void main(){
+
+    one = malloc(sizeof(struct node));
+    one->data = 1;
+    two = malloc(sizeof(struct node));
+    two->data = 2;
+    one -> next = two;
+    two -> next = NULL;
+    
+
+    printList(one); 
+
+
 }
