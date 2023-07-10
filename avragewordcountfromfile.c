@@ -22,8 +22,22 @@ int main()
     }
     printf("\n");
     
+    int count = 0;
+    int wordCount = 0;
+    int total = 0;
+    for (int i = 0; file[i] != '\0'; i++)
+    {
+        if (file[i] == ' ')
+        {
+            total += count;
+            count = 0;
+            wordCount++;
+        }
+        else
+        {
+            count++;
+        }
+    }
 
-    
-
-
+    printf("Average word length: %d\n", total / wordCount);
 }
