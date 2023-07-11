@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-//find the average word length 
 char words[100] = "This is a test string";
 
 int main()

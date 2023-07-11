@@ -3,6 +3,7 @@
 
 int main()
 {
+    char ignore[] = {'\t', ',', '.', '!', '?', '\n'};
     FILE *fptr;
     fptr = fopen("file.txt", "r");
 
@@ -16,10 +17,28 @@ int main()
     fread(file, sizeof(char), size, fptr);
     fclose(fptr);
 
+   
+    printf("\n");
+
+    //remove punctuation
+    for (int i = 0; file[i] != '\0'; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            if (file[i] == ignore[j])
+            {
+                for (int k = i; file[k] != '\0'; k++)
+                {
+                    file[k] = file[k + 1];
+                }
+            }
+        }
+    }
+
     for (int i = 0; i < size; i++)
     {
         printf("%c", file[i]);
-    }
+    } 
     printf("\n");
     
     int count = 0;
