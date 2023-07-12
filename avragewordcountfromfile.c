@@ -46,16 +46,21 @@ int main()
     int total = 0;
     for (int i = 0; file[i] != '\0'; i++)
     {
-        if (file[i] == ' ')
+        if (file[i] == ' ' && file[i + 1] == ' ')
         {
+            continue;
+        }
+        else if (file[i] == ' ')
+        {
+            wordCount++;
             total += count;
             count = 0;
-            wordCount++;
         }
         else
         {
             count++;
         }
+
     }
 
     printf("Average word length: %d\n", total / wordCount);
