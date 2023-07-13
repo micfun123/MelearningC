@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+int main(int argc, char* argv[])
 {
     char ignore[] = {'\t', ',', '.', '!', '?', '\n','#','$','%','&','(',')','*','+','-','/',';',':','<','=','>','@','[','\\',']','^','_','`','{','|','}','~'};
     FILE *fptr;
-    fptr = fopen("file.txt", "r");
+    fptr = fopen(argv[1], "r");
 
     fseek(fptr, 0, SEEK_END);
     int size = ftell(fptr);
