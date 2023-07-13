@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
     fread(file, sizeof(char), size, fptr);
     fclose(fptr);
 
-   
+    printf("File name: %s\n", argv[1]);
     printf("\n");
 
     //remove punctuation
