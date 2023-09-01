@@ -17,6 +17,11 @@ bool End_of_String()
     return !(Pos < strlen(string));
 }
 
+bool is_error()
+{
+    return errorID != ERROR_NONE;
+}
+
 void init_parse(const char in_string[])
 {
     Pos = 0;
@@ -89,7 +94,7 @@ double get_product()
     // a product is 1 or more numbers multiplied togeather
     double result = 1;
     result *= get_num();
-    if (errorID != ERROR_NONE)
+    if (is_error())
     {
         return 0;
     }
@@ -109,7 +114,7 @@ double get_product()
             return 0;
         }
         result *= get_num();
-        if (errorID != ERROR_NONE)
+        if(is_error())
         {
             return 0;
         }
@@ -143,7 +148,7 @@ int main()
 
     init_parse("2*    2");
     double result = get_product();
-    if (errorID != ERROR_NONE)
+    if (is_error())
     {
         printf("Error: ");
         error_message(errorID);
@@ -159,6 +164,7 @@ int main()
     {
         printf("%f\n", result);
     }
+    
 
     init_parse("2* a*  2");
     result = get_product();
