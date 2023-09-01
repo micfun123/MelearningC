@@ -117,6 +117,25 @@ double get_product()
     return result;
 }
 
+
+char error_message(int errorID)
+{
+    switch (errorID)
+    {
+    case ERROR_NONE:
+        printf("No Error");
+        break;
+    case ERROR_INVALID_CHAR:
+        printf("Invalid Character");
+        break;
+    case ERROR_UNEXPECTED_END_OF_STRING:
+        printf("Unexpected End of String");
+        break;
+    default:
+        printf("Unknown Error");
+    }
+}
+
 int main()
 {
     //char myString[] = "2 * 2";
@@ -124,10 +143,18 @@ int main()
     //char myString2[] = "23+22";
     //printf("%d\n", calc(myString2));
 
-    init_parse("2*2");
+    init_parse("2*   *2");
     double result = get_product();
     if(errorID != ERROR_NONE){
-        printf("ERROR ID : %d , ERROR POS : %d \n",errorID , errorPos+1);
+        printf("Error: ");
+        error_message(errorID);
+        printf(" at position %d\n",errorPos +1);
+        printf("%s\n",string);
+        for(int i = 0; i < errorPos; i++){
+            printf(" ");
+        }
+        printf("^\n");
+
     }
     else{
         printf("%f\n",result);
