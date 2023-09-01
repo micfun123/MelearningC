@@ -3,9 +3,13 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define ERROR_NONE 0
-#define ERROR_INVALID_CHAR 1
-#define ERROR_UNEXPECTED_END_OF_STRING 2
+
+enum ErrorID
+{
+    ERROR_NONE,
+    ERROR_INVALID_CHAR,
+    ERROR_UNEXPECTED_END_OF_STRING
+};
 
 size_t Pos;
 const char *string;
