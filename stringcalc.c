@@ -141,7 +141,7 @@ int main()
     // char myString2[] = "23+22";
     // printf("%d\n", calc(myString2));
 
-    init_parse("2*   2*");
+    init_parse("2*    2");
     double result = get_product();
     if (errorID != ERROR_NONE)
     {
@@ -159,6 +159,27 @@ int main()
     {
         printf("%f\n", result);
     }
+
+    init_parse("2* a*  2");
+    result = get_product();
+    if (errorID != ERROR_NONE)
+    {
+        printf("Error: ");
+        error_message(errorID);
+        printf(" at position %d\n", errorPos + 1);
+        printf("%s\n", string);
+        for (int i = 0; i < errorPos; i++)
+        {
+            printf(" ");
+        }
+        printf("^\n");
+    }
+    else
+    {
+        printf("%f\n", result);
+    }
+
+    
 
     return 0;
 }
