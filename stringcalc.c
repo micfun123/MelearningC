@@ -12,8 +12,6 @@ const char *string;
 int errorID = 0;
 int errorPos = 0;
 
-
-
 bool End_of_String()
 {
     return !(Pos < strlen(string));
@@ -24,7 +22,6 @@ void init_parse(const char in_string[])
     Pos = 0;
     string = in_string;
     errorID = ERROR_NONE;
-    
 }
 
 char get_char()
@@ -76,7 +73,7 @@ double get_num()
         errorPos = Pos;
         return 0;
     }
-    
+
     while (is_digit(peek_char()))
     {
         // No skip whitespace here!
@@ -92,38 +89,39 @@ double get_product()
     // a product is 1 or more numbers multiplied togeather
     double result = 1;
     result *= get_num();
-    if(errorID != ERROR_NONE){
+    if (errorID != ERROR_NONE)
+    {
         return 0;
     }
     Skip_WhiteSpace();
-    if(End_of_String()){
+    if (End_of_String())
+    {
         return result;
     }
     if (peek_char() == '*')
     {
         get_char();
         Skip_WhiteSpace();
-        if(End_of_String()){
+        if (End_of_String())
+        {
             errorID = ERROR_UNEXPECTED_END_OF_STRING;
             errorPos = Pos;
             return 0;
         }
         result *= get_num();
-        if(errorID != ERROR_NONE){
+        if (errorID != ERROR_NONE)
+        {
             return 0;
         }
-
     }
     return result;
 }
-
 
 char error_message(int errorID)
 {
     switch (errorID)
     {
     case ERROR_NONE:
-        printf("No Error");
         break;
     case ERROR_INVALID_CHAR:
         printf("Invalid Character");
@@ -138,26 +136,28 @@ char error_message(int errorID)
 
 int main()
 {
-    //char myString[] = "2 * 2";
-    //printf("%d\n", calc(myString));
-    //char myString2[] = "23+22";
-    //printf("%d\n", calc(myString2));
+    // char myString[] = "2 * 2";
+    // printf("%d\n", calc(myString));
+    // char myString2[] = "23+22";
+    // printf("%d\n", calc(myString2));
 
-    init_parse("2*   *2");
+    init_parse("2*   2*");
     double result = get_product();
-    if(errorID != ERROR_NONE){
+    if (errorID != ERROR_NONE)
+    {
         printf("Error: ");
         error_message(errorID);
-        printf(" at position %d\n",errorPos +1);
-        printf("%s\n",string);
-        for(int i = 0; i < errorPos; i++){
+        printf(" at position %d\n", errorPos + 1);
+        printf("%s\n", string);
+        for (int i = 0; i < errorPos; i++)
+        {
             printf(" ");
         }
         printf("^\n");
-
     }
-    else{
-        printf("%f\n",result);
+    else
+    {
+        printf("%f\n", result);
     }
 
     return 0;
