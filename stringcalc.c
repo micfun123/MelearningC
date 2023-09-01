@@ -3,8 +3,16 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define ERROR_NONE 0
+#define ERROR_INVALID_CHAR 1
+#define ERROR_UNEXPECTED_END_OF_STRING 2
+
 size_t Pos;
 const char *string;
+int errorID = 0;
+int errorPos = 0;
+
+
 
 bool End_of_String()
 {
@@ -15,6 +23,8 @@ void init_parse(const char in_string[])
 {
     Pos = 0;
     string = in_string;
+    errorID = ERROR_NONE;
+    
 }
 
 char get_char()
@@ -49,19 +59,6 @@ bool allowed_char(char c)
     return (c >= '0' && c <= '9') || c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')';
 }
 
-char get_digit()
-{
-    Skip_WhiteSpace();
-    // find the next allowed digit
-    char c = get_char();
-    while (!allowed_char(c))
-    {
-        Skip_WhiteSpace();
-        c = get_char();
-    }
-    return c;
-}
-
 bool is_digit(char c)
 {
     return (c >= '0' && c <= '9');
@@ -73,6 +70,13 @@ double get_num()
     int result = 0;
 
     Skip_WhiteSpace();
+    if (!is_digit(peek_char()))
+    {
+        errorID = ERROR_INVALID_CHAR;
+        errorPos = Pos;
+        return 0;
+    }
+    
     while (is_digit(peek_char()))
     {
         // No skip whitespace here!
@@ -88,12 +92,27 @@ double get_product()
     // a product is 1 or more numbers multiplied togeather
     double result = 1;
     result *= get_num();
+    if(errorID != ERROR_NONE){
+        return 0;
+    }
     Skip_WhiteSpace();
+    if(End_of_String()){
+        return result;
+    }
     if (peek_char() == '*')
     {
         get_char();
         Skip_WhiteSpace();
+        if(End_of_String()){
+            errorID = ERROR_UNEXPECTED_END_OF_STRING;
+            errorPos = Pos;
+            return 0;
+        }
         result *= get_num();
+        if(errorID != ERROR_NONE){
+            return 0;
+        }
+
     }
     return result;
 }
@@ -105,8 +124,14 @@ int main()
     //char myString2[] = "23+22";
     //printf("%d\n", calc(myString2));
 
-    init_parse("26 * 2");    
-    printf("%f",get_product());
+    init_parse("2*2");
+    double result = get_product();
+    if(errorID != ERROR_NONE){
+        printf("ERROR ID : %d , ERROR POS : %d \n",errorID , errorPos+1);
+    }
+    else{
+        printf("%f\n",result);
+    }
 
     return 0;
 }
