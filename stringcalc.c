@@ -103,11 +103,7 @@ double get_product()
         return 0;
     }
     Skip_WhiteSpace();
-    if (End_of_String())
-    {
-        return result;
-    }
-    if (peek_char() == '*')
+    while (!End_of_String() && peek_char() == '*')
     {
         get_char();
         Skip_WhiteSpace();
@@ -118,13 +114,15 @@ double get_product()
             return 0;
         }
         result *= get_num();
-        if(is_error())
+        if (is_error())
         {
             return 0;
         }
     }
+    
     return result;
 }
+
 
 char error_message(int errorID)
 {
@@ -150,7 +148,7 @@ int main()
     // char myString2[] = "23+22";
     // printf("%d\n", calc(myString2));
 
-    init_parse("2*    2");
+    init_parse("2* 2");
     double result = get_product();
     if (is_error())
     {
@@ -170,7 +168,7 @@ int main()
     }
     
 
-    init_parse("2* a*  2");
+    init_parse("2* 2 * 2");
     result = get_product();
     if (errorID != ERROR_NONE)
     {
