@@ -79,6 +79,10 @@ double get_num()
         negative = true;
         get_char();
     }
+    if (peek_char() == '+')
+    {
+        get_char();
+    }
     Skip_WhiteSpace();
     if (!is_digit(peek_char()))
     {
@@ -222,6 +226,25 @@ int main()
     }
 
     init_parse("3 + -2");
+    result = get_sum();
+    if (errorID != ERROR_NONE)
+    {
+        printf("Error: ");
+        error_message(errorID);
+        printf(" at position %d\n", errorPos + 1);
+        printf("%s\n", string);
+        for (int i = 0; i < errorPos; i++)
+        {
+            printf(" ");
+        }
+        printf("^\n");
+    }
+    else
+    {
+        printf("%f\n", result);
+    }
+
+    init_parse("+3 +2");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
