@@ -284,10 +284,12 @@ void calc(const char *string)
 
 int main()
 {
+    //input string
+    char string[100];
+    printf("Enter a string: ");
+    scanf("%[^\n]%*c", string);
+    calc(string);
     
-    calc("5+5");
-    calc("5.2+5.2");
-    calc("2.3 + 1.5");
 
     return 0;
 }
