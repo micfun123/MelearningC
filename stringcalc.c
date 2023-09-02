@@ -115,22 +115,42 @@ double get_product()
         return 0;
     }
     Skip_WhiteSpace();
-    while (!End_of_String() && (peek_char() == '*'))
+    while (!End_of_String() && (peek_char() == '*' || peek_char() == '/'))
     {
-        get_char();
-        Skip_WhiteSpace();
-        if (End_of_String())
+        if (peek_char() == '*')
         {
-            errorID = ERROR_UNEXPECTED_END_OF_STRING;
-            errorPos = Pos;
-            return 0;
+            Skip_WhiteSpace();
+            if (End_of_String())
+            {
+                errorID = ERROR_UNEXPECTED_END_OF_STRING;
+                errorPos = Pos;
+                return 0;
+            }
+            get_char();
+            result *= get_num();
+            if (is_error())
+            {
+                return 0;
+            }
+            Skip_WhiteSpace();
         }
-        result *= get_num();
-        if (is_error())
+        else if (peek_char() == '/')
         {
-            return 0;
+            Skip_WhiteSpace();
+            if (End_of_String())
+            {
+                errorID = ERROR_UNEXPECTED_END_OF_STRING;
+                errorPos = Pos;
+                return 0;
+            }
+            get_char();
+            result /= get_num();
+            if (is_error())
+            {
+                return 0;
+            }
+            Skip_WhiteSpace();
         }
-        Skip_WhiteSpace();
     }
     return result;
 }
@@ -145,7 +165,7 @@ double get_sum()
     Skip_WhiteSpace();
     while (!End_of_String() && (peek_char() == '+' || peek_char() == '-'))
     {
-        if (get_char() == '+')
+        if (peek_char() == '+')
         {
             Skip_WhiteSpace();
             if (End_of_String())
@@ -154,6 +174,7 @@ double get_sum()
                 errorPos = Pos;
                 return 0;
             }
+            get_char();
             result += get_product();
             if (is_error())
             {
@@ -161,7 +182,7 @@ double get_sum()
             }
             Skip_WhiteSpace();
         }
-        else if (get_char() == '-')
+        else if (peek_char() == '-')
         {
             Skip_WhiteSpace();
             if (End_of_String())
@@ -170,6 +191,7 @@ double get_sum()
                 errorPos = Pos;
                 return 0;
             }
+            get_char();
             result -= get_product();
             if (is_error())
             {
@@ -262,7 +284,7 @@ int main()
         printf("%f\n", result);
     }
 
-    init_parse("3+-2");
+    init_parse("6 / 2 * 3");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
