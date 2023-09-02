@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 
 // defining the functions
 void calc(const char *string);
@@ -141,11 +142,42 @@ double get_num()
     return result;
 }
 
+double get_powers()
+{
+    double result = get_num();
+    if (is_error())
+    {
+        return 0;
+    }
+    Skip_WhiteSpace();
+    // check for power or root
+    while (!End_of_String() && peek_char() == '^'){
+        if(peek_char() == '^'){
+            Skip_WhiteSpace();
+            if (End_of_String())
+            {
+                errorID = ERROR_UNEXPECTED_END_OF_STRING;
+                errorPos = Pos;
+                return 0;
+            }
+            get_char();
+            result = pow(result, get_num());
+            if (is_error())
+            {
+                return 0;
+            }
+            Skip_WhiteSpace();
+        }
+    }
+    return result;
+    
+}
+
 double get_product()
 {
     // a product is 1 or more numbers multiplied togeather
     double result = 1;
-    result *= get_num();
+    result *= get_powers();
     if (is_error())
     {
         return 0;
