@@ -3,6 +3,20 @@
 #include <string.h>
 #include <stdbool.h>
 
+//defining the functions
+int calc(const char *string);
+double get_sum();
+double get_product();
+double get_num();
+void Skip_WhiteSpace();
+char get_char();
+char peek_char();
+bool End_of_String();
+bool is_error();
+void init_parse(const char in_string[]);
+
+
+
 enum ErrorID
 {
     ERROR_NONE,
@@ -82,6 +96,26 @@ double get_num()
     if (peek_char() == '+')
     {
         get_char();
+    }
+    if (peek_char() == '(')
+    {
+        Skip_WhiteSpace();
+        get_char();
+        Skip_WhiteSpace();
+        result = get_sum();
+        if (is_error())
+        {
+            return 0;
+        }
+        if (peek_char() != ')')
+        {
+            errorID = ERROR_INVALID_CHAR;
+            errorPos = Pos;
+            return 0;
+        }
+        get_char();
+        Skip_WhiteSpace();
+        return result;
     }
     Skip_WhiteSpace();
     if (!is_digit(peek_char()))
@@ -203,6 +237,7 @@ double get_sum()
     return result;
 }
 
+
 char error_message(int errorID)
 {
     switch (errorID)
@@ -284,7 +319,7 @@ int main()
         printf("%f\n", result);
     }
 
-    init_parse("6 / 2 * 3");
+    init_parse("((2+2) +2) * 3");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
