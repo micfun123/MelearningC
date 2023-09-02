@@ -143,9 +143,8 @@ double get_sum()
         return 0;
     }
     Skip_WhiteSpace();
-    while (!End_of_String() && (peek_char() == '+'))
+    while (!End_of_String() && (peek_char() == '+' || peek_char() == '-'))
     {
-        get_char();
         Skip_WhiteSpace();
         if (End_of_String())
         {
@@ -153,7 +152,16 @@ double get_sum()
             errorPos = Pos;
             return 0;
         }
-        result += get_product();
+        if (peek_char() == '+')
+        {
+            get_char();
+            result += get_product();
+        }
+        else if (peek_char() == '-')
+        {
+            get_char();
+            result -= get_product();
+        }
         if (is_error())
         {
             return 0;
@@ -225,7 +233,7 @@ int main()
         printf("%f\n", result);
     }
 
-    init_parse("3 + -2");
+    init_parse("3- 2");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
@@ -244,7 +252,7 @@ int main()
         printf("%f\n", result);
     }
 
-    init_parse("+3 +2");
+    init_parse("3+2");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
