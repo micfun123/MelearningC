@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-//defining the functions
+// defining the functions
 void calc(const char *string);
 double get_sum();
 double get_product();
@@ -14,8 +14,6 @@ char peek_char();
 bool End_of_String();
 bool is_error();
 void init_parse(const char in_string[]);
-
-
 
 enum ErrorID
 {
@@ -72,7 +70,6 @@ void Skip_WhiteSpace()
     }
 }
 
-
 bool is_digit(char c)
 {
     return (c >= '0' && c <= '9');
@@ -119,14 +116,11 @@ double get_num()
         errorPos = Pos;
         return 0;
     }
-    // set up negative number
-
-    // get the number
     while (!End_of_String() && is_digit(peek_char()))
     {
         result *= 10;
         result += get_char() - '0';
-        //check for decimal
+        // check for decimal
         if (peek_char() == '.')
         {
             get_char();
@@ -245,7 +239,6 @@ double get_sum()
     return result;
 }
 
-
 char error_message(int errorID)
 {
     switch (errorID)
@@ -270,7 +263,7 @@ void calc(const char *string)
     if (is_error())
     {
         error_message(errorID);
-        printf(" at position %d\n", errorPos+1);
+        printf(" at position %d\n", errorPos + 1);
         printf("%s\n", string);
         for (int i = 0; i < errorPos; i++)
         {
@@ -284,12 +277,10 @@ void calc(const char *string)
 
 int main()
 {
-    //input string
+    // input string
     char string[100];
     printf("Enter a string: ");
     scanf("%[^\n]%*c", string);
     calc(string);
-    
-
     return 0;
 }
