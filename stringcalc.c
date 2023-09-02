@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-
 enum ErrorID
 {
     ERROR_NONE,
@@ -103,7 +102,7 @@ double get_product()
         return 0;
     }
     Skip_WhiteSpace();
-    while (!End_of_String() && peek_char() == '*')
+    while (!End_of_String() && (peek_char() == '*'))
     {
         get_char();
         Skip_WhiteSpace();
@@ -118,11 +117,38 @@ double get_product()
         {
             return 0;
         }
+        Skip_WhiteSpace();
     }
-    
     return result;
 }
-
+double get_sum()
+{
+    double result = 0;
+    result += get_product();
+    if (is_error())
+    {
+        return 0;
+    }
+    Skip_WhiteSpace();
+    while (!End_of_String() && (peek_char() == '+'))
+    {
+        get_char();
+        Skip_WhiteSpace();
+        if (End_of_String())
+        {
+            errorID = ERROR_UNEXPECTED_END_OF_STRING;
+            errorPos = Pos;
+            return 0;
+        }
+        result += get_product();
+        if (is_error())
+        {
+            return 0;
+        }
+        Skip_WhiteSpace();
+    }
+    return result;
+}
 
 char error_message(int errorID)
 {
@@ -148,28 +174,9 @@ int main()
     // char myString2[] = "23+22";
     // printf("%d\n", calc(myString2));
 
-    init_parse("9 * 2");
-    double result = get_product();
-    if (is_error())
-    {
-        printf("Error: ");
-        error_message(errorID);
-        printf(" at position %d\n", errorPos + 1);
-        printf("%s\n", string);
-        for (int i = 0; i < errorPos; i++)
-        {
-            printf(" ");
-        }
-        printf("^\n");
-    }
-    else
-    {
-        printf("%f\n", result);
-    }
-    
 
-    init_parse("2* 2 * b * 2");
-    result = get_product();
+    init_parse("2 * 3 + 2");
+    double result = get_sum();
     if (errorID != ERROR_NONE)
     {
         printf("Error: ");
@@ -187,9 +194,8 @@ int main()
         printf("%f\n", result);
     }
 
-    
-    init_parse("2* 2 * 2 * 2");
-    result = get_product();
+    init_parse("2 + 2 * 3");
+    result = get_sum();
     if (errorID != ERROR_NONE)
     {
         printf("Error: ");
@@ -206,9 +212,7 @@ int main()
     {
         printf("%f\n", result);
     }
-
-
-    
 
     return 0;
+
 }
