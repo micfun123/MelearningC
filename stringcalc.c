@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 //defining the functions
-int calc(const char *string);
+void calc(const char *string);
 double get_sum();
 double get_product();
 double get_num();
@@ -255,88 +255,33 @@ char error_message(int errorID)
     }
 }
 
+void calc(const char *string)
+{
+    init_parse(string);
+    double result = get_sum();
+    if (is_error())
+    {
+        error_message(errorID);
+        printf(" at position %d\n", errorPos+1);
+        printf("%s\n", string);
+        for (int i = 0; i < errorPos; i++)
+        {
+            printf(" ");
+        }
+        printf("^\n");
+        return;
+    }
+    printf("%f\n", result);
+}
+
 int main()
 {
-    // char myString[] = "2 * 2";
-    // printf("%d\n", calc(myString));
-    // char myString2[] = "23+22";
-    // printf("%d\n", calc(myString2));
-
-    init_parse("2 * 3 + 2");
-    double result = get_sum();
-    if (errorID != ERROR_NONE)
-    {
-        printf("Error: ");
-        error_message(errorID);
-        printf(" at position %d\n", errorPos + 1);
-        printf("%s\n", string);
-        for (int i = 0; i < errorPos; i++)
-        {
-            printf(" ");
-        }
-        printf("^\n");
-    }
-    else
-    {
-        printf("%f\n", result);
-    }
-
-    init_parse("-2 * 3");
-    result = get_sum();
-    if (errorID != ERROR_NONE)
-    {
-        printf("Error: ");
-        error_message(errorID);
-        printf(" at position %d\n", errorPos + 1);
-        printf("%s\n", string);
-        for (int i = 0; i < errorPos; i++)
-        {
-            printf(" ");
-        }
-        printf("^\n");
-    }
-    else
-    {
-        printf("%f\n", result);
-    }
-
-    init_parse("3- 2");
-    result = get_sum();
-    if (errorID != ERROR_NONE)
-    {
-        printf("Error: ");
-        error_message(errorID);
-        printf(" at position %d\n", errorPos + 1);
-        printf("%s\n", string);
-        for (int i = 0; i < errorPos; i++)
-        {
-            printf(" ");
-        }
-        printf("^\n");
-    }
-    else
-    {
-        printf("%f\n", result);
-    }
-
-    init_parse("((2+2) +2) * 3");
-    result = get_sum();
-    if (errorID != ERROR_NONE)
-    {
-        printf("Error: ");
-        error_message(errorID);
-        printf(" at position %d\n", errorPos + 1);
-        printf("%s\n", string);
-        for (int i = 0; i < errorPos; i++)
-        {
-            printf(" ");
-        }
-        printf("^\n");
-    }
-    else
-    {
-        printf("%f\n", result);
-    }
+    char myString[] = "2 * 2";
+    calc(myString);
+    calc("2 * 2");
+    calc("2 * 2 + 2");
+    calc("2 * 2 + 2 * 2");
+    calc("a * 2 + 2 * 2");
 
     return 0;
 }
