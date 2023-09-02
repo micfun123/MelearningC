@@ -52,7 +52,7 @@ char peek_char()
 
 void Skip_WhiteSpace()
 {
-    while (peek_char() == ' ')
+    while (peek_char() == ' ' || peek_char() == '\t' || peek_char() == '\n')
     {
         Pos++;
     }
