@@ -145,28 +145,38 @@ double get_sum()
     Skip_WhiteSpace();
     while (!End_of_String() && (peek_char() == '+' || peek_char() == '-'))
     {
-        Skip_WhiteSpace();
-        if (End_of_String())
+        if (get_char() == '+')
         {
-            errorID = ERROR_UNEXPECTED_END_OF_STRING;
-            errorPos = Pos;
-            return 0;
-        }
-        if (peek_char() == '+')
-        {
-            get_char();
+            Skip_WhiteSpace();
+            if (End_of_String())
+            {
+                errorID = ERROR_UNEXPECTED_END_OF_STRING;
+                errorPos = Pos;
+                return 0;
+            }
             result += get_product();
+            if (is_error())
+            {
+                return 0;
+            }
+            Skip_WhiteSpace();
         }
-        else if (peek_char() == '-')
+        else if (get_char() == '-')
         {
-            get_char();
+            Skip_WhiteSpace();
+            if (End_of_String())
+            {
+                errorID = ERROR_UNEXPECTED_END_OF_STRING;
+                errorPos = Pos;
+                return 0;
+            }
             result -= get_product();
+            if (is_error())
+            {
+                return 0;
+            }
+            Skip_WhiteSpace();
         }
-        if (is_error())
-        {
-            return 0;
-        }
-        Skip_WhiteSpace();
     }
     return result;
 }
@@ -252,7 +262,7 @@ int main()
         printf("%f\n", result);
     }
 
-    init_parse("3+2");
+    init_parse("3+-2");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
