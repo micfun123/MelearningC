@@ -73,7 +73,7 @@ double get_num()
 {
     // get a int from the string up to the next non digit char
     int result = 0;
-     bool negative = false;
+    bool negative = false;
     if (peek_char() == '-')
     {
         negative = true;
@@ -86,8 +86,8 @@ double get_num()
         errorPos = Pos;
         return 0;
     }
-    //set up negative number
-   
+    // set up negative number
+
     // get the number
     while (!End_of_String() && is_digit(peek_char()))
     {
@@ -99,7 +99,6 @@ double get_num()
         result *= -1;
     }
     return result;
-
 }
 
 double get_product()
@@ -184,7 +183,6 @@ int main()
     // char myString2[] = "23+22";
     // printf("%d\n", calc(myString2));
 
-
     init_parse("2 * 3 + 2");
     double result = get_sum();
     if (errorID != ERROR_NONE)
@@ -204,7 +202,7 @@ int main()
         printf("%f\n", result);
     }
 
-    init_parse("-2 * 3"); 
+    init_parse("-2 * 3");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
@@ -223,7 +221,7 @@ int main()
         printf("%f\n", result);
     }
 
-     init_parse("3 + -2"); 
+    init_parse("3 + -2");
     result = get_sum();
     if (errorID != ERROR_NONE)
     {
@@ -243,5 +241,4 @@ int main()
     }
 
     return 0;
-
 }
