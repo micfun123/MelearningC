@@ -72,11 +72,6 @@ void Skip_WhiteSpace()
     }
 }
 
-bool allowed_char(char c)
-{
-    // 0-9 + - * / ( )
-    return (c >= '0' && c <= '9') || c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')';
-}
 
 bool is_digit(char c)
 {
@@ -86,7 +81,7 @@ bool is_digit(char c)
 double get_num()
 {
     // get a int from the string up to the next non digit char
-    int result = 0;
+    double result = 0;
     bool negative = false;
     if (peek_char() == '-')
     {
@@ -131,6 +126,19 @@ double get_num()
     {
         result *= 10;
         result += get_char() - '0';
+        //check for decimal
+        if (peek_char() == '.')
+        {
+            get_char();
+            double decimal = 0;
+            double decimal_place = 0.1;
+            while (!End_of_String() && is_digit(peek_char()))
+            {
+                decimal += (get_char() - '0') * decimal_place;
+                decimal_place *= 0.1;
+            }
+            result += decimal;
+        }
     }
     if (negative)
     {
@@ -276,12 +284,10 @@ void calc(const char *string)
 
 int main()
 {
-    char myString[] = "2 * 2";
-    calc(myString);
-    calc("2 * 2");
-    calc("2 * 2 + 2");
-    calc("2 * 2 + 2 * 2");
-    calc("a * 2 + 2 * 2");
+    
+    calc("5+5");
+    calc("5.2+5.2");
+    calc("2.3 + 1.5");
 
     return 0;
 }
