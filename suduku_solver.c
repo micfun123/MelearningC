@@ -78,10 +78,67 @@ bool check_row(int row)
     }
 }
 
+bool check_column(int column)
+{
+    int buffer[9];
+    for (int i = 0; i < 9; i++)
+    {
+        if (suduku_board[i][column] == 0)
+        {
+            return false;
+        }
+        else
+        {
+            buffer[i] = suduku_board[i][column];
+        }
+    }
+    // check for duplicates
+    int is_duplicate = 0;
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = i + 1; j < 9; j++)
+        {
+            if (buffer[i] == buffer[j])
+            {
+                is_duplicate = 1;
+            }
+        }
+    }
+    if (is_duplicate == 1)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 int main()
 {
     load_board();
     print_board();
-    check_row(0);
+    for (int i = 0; i < 9; i++)
+    {
+        if (check_row(i) == false)
+        {
+            printf("Row %d is invalid\n", i + 1);
+        }
+        else
+        {
+            printf("Row %d is valid\n", i + 1);
+        }
+    }
+    for (int i = 0; i < 9; i++)
+    {
+        if (check_column(i) == false)
+        {
+            printf("Column %d is invalid\n", i + 1);
+        }
+        else
+        {
+            printf("Column %d is valid\n", i + 1);
+        }
+    }
     return 0;
 }
