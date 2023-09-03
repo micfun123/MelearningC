@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#define POPULATION_SIZE 1000
+
+
 int suduku_board[9][9];
+
 
 void load_board()
 {
@@ -42,12 +46,27 @@ void print_board()
     printf("-------------------------\n");
 }
 
+int next_empty(int *row, int *column)
+{
+    for (*row = 0; *row < 9; (*row)++)
+    {
+        for (*column = 0; *column < 9; (*column)++)
+        {
+            if (suduku_board[*row][*column] == 0)
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+} 
+
+
 void init_board()
 {
     load_board();
     print_board();
 }
-
 
 
 double check_row(int row)
@@ -152,6 +171,8 @@ double check_board()
     return score/27; // we get 27 from 9*3 where 9 is the number of rows, columns, and squares and 3 is the number of checks per row, column, and square
 
 }
+
+
 
 int main()
 {
