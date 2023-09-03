@@ -42,6 +42,13 @@ void print_board()
     printf("-------------------------\n");
 }
 
+void init_board()
+{
+    load_board();
+    print_board();
+
+}
+
 bool check_row(int row)
 {
     int buffer[9];
@@ -157,33 +164,36 @@ bool check_cube(int cube)
     }
 }
 
+bool check_board()
+{
+    for (int i = 0; i < 9; i++)
+    {
+        if (check_row(i) == false)
+        {
+            return false;
+        }
+        if (check_column(i) == false)
+        {
+            return false;
+        }
+        if (check_cube(i) == false)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main()
 {
-    load_board();
-    print_board();
-    for(int i = 0; i < 9; i++){
-        if(check_row(i) == false){
-            printf("Row %d is not valid\n", i);
-        }
-        else{
-            printf("Row %d is valid\n", i);
-        }
+    init_board();
+    if (check_board() == true)
+    {
+        printf("Board is valid\n");
     }
-    for(int i = 0; i < 9; i++){
-        if(check_column(i) == false){
-            printf("Column %d is not valid\n", i);
-        }
-        else{
-            printf("Column %d is valid\n", i);
-        }
-    }
-    for(int i = 0; i < 9; i++){
-        if(check_cube(i) == false){
-            printf("Cube %d is not valid\n", i);
-        }
-        else{
-            printf("Cube %d is valid\n", i);
-        }
+    else
+    {
+        printf("Board is invalid\n");
     }
 
     return 0;
