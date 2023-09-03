@@ -63,7 +63,6 @@ int next_empty(int *row, int *column)
     return 0;
 }
 
-
 bool check_row(int row)
 {
     int buffer[9];
@@ -199,17 +198,42 @@ bool check_board()
     return true;
 }
 
-int main()
+//solve the board using backtracking
+bool solve_board()
 {
-    init_board();
-    if (check_board() == true)
+    int row, column;
+    if (next_empty(&row, &column) == 0)
     {
-        printf("Board is valid\n");
+        if (check_board() == true)
+        {
+            printf("Solved!\n");
+            print_board();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     else
     {
-        printf("Board is invalid\n");
+        for (int i = 1; i < 10; i++)
+        {
+            suduku_board[row][column] = i;
+            if (solve_board() == true)
+            {
+                return true;
+            }
+            suduku_board[row][column] = 0;
+        }
     }
+    return false;
+}
+
+int main()
+{
+    init_board();
+    solve_board();
 
     return 0;
 }
