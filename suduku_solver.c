@@ -46,8 +46,23 @@ void init_board()
 {
     load_board();
     print_board();
-
 }
+
+int next_empty(int *row, int *column)
+{
+    for (*row = 0; *row < 9; (*row)++)
+    {
+        for (*column = 0; *column < 9; (*column)++)
+        {
+            if (suduku_board[*row][*column] == 0)
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 
 bool check_row(int row)
 {
