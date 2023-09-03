@@ -114,31 +114,77 @@ bool check_column(int column)
     }
 }
 
+bool check_cube(int cube)
+{
+    int buffer[9];
+    int row = cube / 3;
+    int column = cube % 3;
+    int index = 0;
+    for (int i = row * 3; i < row * 3 + 3; i++)
+    {
+        for (int j = column * 3; j < column * 3 + 3; j++)
+        {
+            if (suduku_board[i][j] == 0)
+            {
+                return false;
+            }
+            else
+            {
+                buffer[index] = suduku_board[i][j];
+                index++;
+            }
+        }
+    }
+    // check for duplicates
+    int is_duplicate = 0;
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = i + 1; j < 9; j++)
+        {
+            if (buffer[i] == buffer[j])
+            {
+                is_duplicate = 1;
+            }
+        }
+    }
+    if (is_duplicate == 1)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 int main()
 {
     load_board();
     print_board();
-    for (int i = 0; i < 9; i++)
-    {
-        if (check_row(i) == false)
-        {
-            printf("Row %d is invalid\n", i + 1);
+    for(int i = 0; i < 9; i++){
+        if(check_row(i) == false){
+            printf("Row %d is not valid\n", i);
         }
-        else
-        {
-            printf("Row %d is valid\n", i + 1);
+        else{
+            printf("Row %d is valid\n", i);
         }
     }
-    for (int i = 0; i < 9; i++)
-    {
-        if (check_column(i) == false)
-        {
-            printf("Column %d is invalid\n", i + 1);
+    for(int i = 0; i < 9; i++){
+        if(check_column(i) == false){
+            printf("Column %d is not valid\n", i);
         }
-        else
-        {
-            printf("Column %d is valid\n", i + 1);
+        else{
+            printf("Column %d is valid\n", i);
         }
     }
+    for(int i = 0; i < 9; i++){
+        if(check_cube(i) == false){
+            printf("Cube %d is not valid\n", i);
+        }
+        else{
+            printf("Cube %d is valid\n", i);
+        }
+    }
+
     return 0;
 }
