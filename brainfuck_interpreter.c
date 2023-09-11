@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-unsigned char brainfuck_memory[1000] = {0};
+unsigned char brainfuck_memory[30000] = {0};
 int place = 0;
 int current = 0;
 int cell = 0;
