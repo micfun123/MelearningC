@@ -69,19 +69,23 @@ void insert(struct DArray *inputlist, int index, int value)
 
 void main()
 {
-    struct DArray things = {0, NULL};
-    append(&things, 1);
-    append(&things, 2);
-    append(&things, 3);
-    append(&things, 4);
+    struct DArray things;
+    init(&things);
+    int adding = 1;
+    while (adding == 1)
+    {
+        printf("Enter a number to add to the list: ");
+        int input;
+        scanf("%d", &input);
+        append(&things, input);
+        printf("Would you like to add another number? (1 for yes, 0 for no): ");
+        scanf("%d", &adding);
+    }
+    printf("The list is: ");
     for (int i = 0; i < things.ListSize; i++)
     {
-        printf("%d\n", things.ListData[i]);
+        printf("%d ", things.ListData[i]);
     }
-    printf("-----------------\n");
-    insert(&things, 2, 5);
-    for (int i = 0; i < things.ListSize; i++)
-    {
-        printf("%d\n", things.ListData[i]);
-    }
+    
+    
 }
