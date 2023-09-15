@@ -48,6 +48,13 @@ int append(struct DArray *inputlist, int index, int value)
     return 0;
 }
 
+void destroy_list(struct DArray *inputlist)
+{
+    free(inputlist->ListData);
+    inputlist->ListData = NULL;
+    inputlist->ListSize = 0;
+}
+
 void main()
 {
     struct DArray things = {0, NULL};
@@ -59,14 +66,11 @@ void main()
     {
         printf("%d\n", things.ListData[i]);
     }
-    printf("Appending\n");
-    append(&things, 2, 5);
-    for (int i = 0; i < things.ListSize; i++)
-    {
-        printf("%d\n", things.ListData[i]);
-    }
-    printf("Deleting\n");
-    delete(&things, 2);
+    printf("-----------------\n");
+    destroy_list(&things);
+    add(&things, 5);
+    add(&things, 6);
+    add(&things, 7);
     for (int i = 0; i < things.ListSize; i++)
     {
         printf("%d\n", things.ListData[i]);
