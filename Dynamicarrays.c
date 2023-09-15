@@ -14,7 +14,7 @@ void init(struct DArray *inputlist)
     inputlist->ListData = NULL;
 }
 
-void add(struct DArray *inputlist, int value)
+void append(struct DArray *inputlist, int value)
 {
     inputlist->ListSize++;
     inputlist->ListData = realloc(inputlist->ListData, inputlist->ListSize * sizeof(int));
@@ -37,7 +37,7 @@ int delete(struct DArray *inputlist, int index)
     return 0;
 }
 
-int append(struct DArray *inputlist, int index, int value)
+int replace(struct DArray *inputlist, int index, int value)
 {
     if (index > inputlist->ListSize)
     {
@@ -55,22 +55,31 @@ void destroy_list(struct DArray *inputlist)
     inputlist->ListSize = 0;
 }
 
+void insert(struct DArray *inputlist, int index, int value)
+{
+    inputlist->ListSize++;
+    inputlist->ListData = realloc(inputlist->ListData, inputlist->ListSize * sizeof(int));
+    for(int i = inputlist->ListSize; i > index; i--)
+    {
+        inputlist->ListData[i] = inputlist->ListData[i - 1];
+    }
+    inputlist->ListData[index] = value;
+
+}
+
 void main()
 {
     struct DArray things = {0, NULL};
-    add(&things, 1);
-    add(&things, 2);
-    add(&things, 3);
-    add(&things, 4);
+    append(&things, 1);
+    append(&things, 2);
+    append(&things, 3);
+    append(&things, 4);
     for (int i = 0; i < things.ListSize; i++)
     {
         printf("%d\n", things.ListData[i]);
     }
     printf("-----------------\n");
-    destroy_list(&things);
-    add(&things, 5);
-    add(&things, 6);
-    add(&things, 7);
+    insert(&things, 2, 5);
     for (int i = 0; i < things.ListSize; i++)
     {
         printf("%d\n", things.ListData[i]);
