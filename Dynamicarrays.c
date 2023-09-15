@@ -1,27 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
-struct DArray{
+struct DArray
+{
     int ListSize;
     int *ListData;
 };
 
-void add(struct DArray *inputlist, int value){
-    inputlist->ListData = realloc(inputlist->ListData, inputlist->ListSize + 1 * sizeof(int));
-    inputlist->ListData[inputlist->ListSize] = value;
-    inputlist->ListSize++;
-    
-}
-
-void init(struct DArray *inputlist){
+void init(struct DArray *inputlist)
+{
     inputlist->ListSize = 0;
     inputlist->ListData = NULL;
 }
 
-int append(struct DArray *inputlist, int index,int value){
-    if (index > inputlist->ListSize){
+void add(struct DArray *inputlist, int value)
+{
+    inputlist->ListSize++;
+    inputlist->ListData = realloc(inputlist->ListData, inputlist->ListSize * sizeof(int));
+    inputlist->ListData[inputlist->ListSize - 1] = value;
+}
+
+int delete(struct DArray *inputlist, int index)
+{
+    if (index > inputlist->ListSize)
+    {
+        printf("Index out of range\n");
+        return -1;
+    }
+    for (int i = index; i < inputlist->ListSize; i++)
+    {
+        inputlist->ListData[i] = inputlist->ListData[i + 1];
+    }
+    inputlist->ListSize--;
+    inputlist->ListData = realloc(inputlist->ListData, inputlist->ListSize * sizeof(int));
+    return 0;
+}
+
+int append(struct DArray *inputlist, int index, int value)
+{
+    if (index > inputlist->ListSize)
+    {
         printf("Index out of range\n");
         return -1;
     }
@@ -29,17 +48,27 @@ int append(struct DArray *inputlist, int index,int value){
     return 0;
 }
 
-void main(){
-    struct  DArray things;
-    init(&things);
+void main()
+{
+    struct DArray things = {0, NULL};
     add(&things, 1);
     add(&things, 2);
     add(&things, 3);
-    append(&things, 10, 5);
-
-    for(int i = 0; i < things.ListSize; i++){
+    add(&things, 4);
+    for (int i = 0; i < things.ListSize; i++)
+    {
         printf("%d\n", things.ListData[i]);
     }
-
-
+    printf("Appending\n");
+    append(&things, 2, 5);
+    for (int i = 0; i < things.ListSize; i++)
+    {
+        printf("%d\n", things.ListData[i]);
+    }
+    printf("Deleting\n");
+    delete(&things, 2);
+    for (int i = 0; i < things.ListSize; i++)
+    {
+        printf("%d\n", things.ListData[i]);
+    }
 }
