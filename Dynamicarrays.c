@@ -67,6 +67,19 @@ void insert(struct DArray *inputlist, int index, int value)
 
 }
 
+void reverse(struct DArray *inputlist)
+{
+    int temp;
+    for (int i = 0; i < inputlist->ListSize / 2; i++)
+    {
+        temp = inputlist->ListData[i];
+        inputlist->ListData[i] = inputlist->ListData[inputlist->ListSize - i - 1];
+        inputlist->ListData[inputlist->ListSize - i - 1] = temp;
+    }
+}
+
+// Main function for testing
+
 void main()
 {
     struct DArray things;
@@ -86,6 +99,13 @@ void main()
     {
         printf("%d ", things.ListData[i]);
     }
+    reverse(&things);
+    printf("\nThe list reversed is: ");
+    for (int i = 0; i < things.ListSize; i++)
+    {
+        printf("%d ", things.ListData[i]);
+    }
+    printf("\n");
     
     
 }
