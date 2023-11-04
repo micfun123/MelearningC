@@ -39,14 +39,12 @@ int main()
     char testidentifier5[] = "_int";
     char testidentifier6[] = "int_";
 
-    printf("%s\n", check_identifier(testidentifier) ? "true" : "false");
-    printf("%s\n", check_identifier(testidentifier2) ? "true" : "false");
-    printf("%s\n", check_identifier(testidentifier3) ? "true" : "false");
-    printf("%s\n", check_identifier(testidentifier4) ? "true" : "false");
-    printf("%s\n", check_identifier(testidentifier5) ? "true" : "false");
-    printf("%s\n", check_identifier(testidentifier6) ? "true" : "false");
-
-
-
+    printf("%s %s\n", testidentifier , check_identifier(testidentifier) ? "is a valid identifier" : "is not a valid identifier");
+    printf("%s %s\n", testidentifier2 , check_identifier(testidentifier2) ? "is a valid identifier" : "is not a valid identifier");
+    printf("%s %s\n", testidentifier3 , check_identifier(testidentifier3) ? "is a valid identifier" : "is not a valid identifier");
+    printf("%s %s\n", testidentifier4 , check_identifier(testidentifier4) ? "is a valid identifier" : "is not a valid identifier");
+    printf("%s %s\n", testidentifier5 , check_identifier(testidentifier5) ? "is a valid identifier" : "is not a valid identifier");
+    printf("%s %s\n", testidentifier6 , check_identifier(testidentifier6) ? "is a valid identifier" : "is not a valid identifier");
+    
     return 0;
 }
