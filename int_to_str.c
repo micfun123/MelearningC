@@ -13,6 +13,11 @@ void int_to_str(int x)
     }
     char str[100];
     int i = 0;
+    if (x == 0)
+    {
+        str[i] = '0';
+        i++;
+    }
     while (x != 0)
     {
         str[i] = x % 10 + '0';
@@ -40,6 +45,17 @@ void int_to_str(int x)
 int main()
 {
     //test the function
+    int_to_str(123);
+    printf("%s\n", out);
+    int_to_str(0);
+    printf("%s\n", out);
+    int_to_str(123456789);
+    printf("%s\n", out);
+    int_to_str(1);
+    printf("%s\n", out);
+    int_to_str(1234567890);
+    printf("%s\n", out);
+
 
 }
 
