@@ -3,7 +3,7 @@
 
 bool isLetter(char c)
 {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '_');
 }
 
 bool isDigit(char c)
@@ -18,7 +18,7 @@ bool check_identifier(char *identifier)
     {
         i++;
         while (identifier[i] != '\0'){
-            if (!isLetter(identifier[i]) || isDigit(identifier[i]))
+            if (!(isLetter(identifier[i]) || isDigit(identifier[i])))
             {
                 return false;
             }
@@ -33,23 +33,20 @@ bool check_identifier(char *identifier)
 int main()
 {
     char testidentifier[] = "int";
-    if (check_identifier(testidentifier))
-    {
-        printf("This is a valid identifier\n");
-    }
-    else
-    {
-        printf("This is not a valid identifier\n");
-    }
-    char testidentifier[] = "2int";
-    if (check_identifier(testidentifier))
-    {
-        printf("This is a valid identifier\n");
-    }
-    else
-    {
-        printf("This is not a valid identifier\n");
-    }
+    char testidentifier2[] = "int2";
+    char testidentifier3[] = "INT";
+    char testidentifier4[] = "";
+    char testidentifier5[] = "_int";
+    char testidentifier6[] = "int_";
+
+    printf("%s\n", check_identifier(testidentifier) ? "true" : "false");
+    printf("%s\n", check_identifier(testidentifier2) ? "true" : "false");
+    printf("%s\n", check_identifier(testidentifier3) ? "true" : "false");
+    printf("%s\n", check_identifier(testidentifier4) ? "true" : "false");
+    printf("%s\n", check_identifier(testidentifier5) ? "true" : "false");
+    printf("%s\n", check_identifier(testidentifier6) ? "true" : "false");
+
+
 
     return 0;
 }
