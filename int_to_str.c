@@ -1,12 +1,16 @@
 #include <stdio.h>
 
-int x = 4452;
 char out[5000];
 
 
 //int_to_str converts an integer to a string
 void int_to_str(int x)
 {
+    //wipe out the string
+    for (int k = 0; k < 100; k++)
+    {
+        out[k] = '\0';
+    }
     char str[100];
     int i = 0;
     while (x != 0)
@@ -35,9 +39,8 @@ void int_to_str(int x)
 
 int main()
 {
-    int_to_str(x);
-    printf("%s\n", out);
-    return 0;
+    //test the function
+
 }
 
 
