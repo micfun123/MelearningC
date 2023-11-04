@@ -5,7 +5,7 @@ char out[5000];
 
 
 //int_to_str converts an integer to a string
-char int_to_str(int x)
+void int_to_str(int x)
 {
     char str[100];
     int i = 0;
