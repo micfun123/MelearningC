@@ -31,12 +31,8 @@ void openfile(char *filename){
 int main(){
 
     openfile("bitmap.bmp");
-    printf("Size of the file: %d\n", size);
-    for (size_t i = 0; i < 15; i++)
-    {
-        printf("%c", bitmap[i]);
-    }
-    
-    
+    printf("Size of the file in bytes: %d\n", size);
+    free(bitmap);
+    return 0;   
 
 }
