@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
+#include <stdint.h>
 
 char *bitmap;
-int size; 
-int width;
-int hight;
+int32_t size;
+int32_t width;
+int32_t hight;
+int32_t bitdepth;
 
 
 
@@ -29,8 +31,11 @@ void openfile(char *filename){
     fclose(file);
 
     //find the width and hight of the image
-    width = *(int *)&bitmap[18];
-    hight = *(int *)&bitmap[22];
+    width = *(int32_t *)&bitmap[18];
+    hight = *(int32_t *)&bitmap[22];
+    bitdepth = *(int32_t *)&bitmap[28];
+
+
 
 
 
@@ -41,9 +46,11 @@ void openfile(char *filename){
 int main(){
 
     openfile("bitmap.bmp");
-    printf("Size of the file in bytes: %d\n", size);
-    printf("Width in pixels: %d\n", width);
-    printf("High in pixels: %d\n", hight);
+    printf("Size of the image: %d\n", size);
+    printf("Width of the image: %d\n", width);
+    printf("Hight of the image: %d\n", hight);
+    printf("Bit depth of the image: %d\n", bitdepth);
+
 
     free(bitmap);
     return 0;   
