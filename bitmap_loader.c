@@ -34,11 +34,19 @@ void openfile(char *filename){
     width = *(int32_t *)&bitmap[18];
     hight = *(int32_t *)&bitmap[22];
     bitdepth = *(int32_t *)&bitmap[28];
+    int pixel_offset = *(int32_t *)&bitmap[10];
+    //rgb for a 24 bit image
+    int r = *(uint8_t *)&bitmap[pixel_offset + 2];
+    int g = *(uint8_t *)&bitmap[pixel_offset + 1];
+    int b = *(uint8_t *)&bitmap[pixel_offset];
+
+    
+    printf("RGB values of the first pixel: %d, %d, %d\n", r, g, b);
 }
 
 int main(){
 
-    openfile("dib16.bmp");
+    openfile("dib24.bmp");
     printf("Size of the image: %d\n", size);
     printf("Width of the image: %d\n", width);
     printf("Hight of the image: %d\n", hight);
