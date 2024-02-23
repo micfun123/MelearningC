@@ -5,6 +5,8 @@
 
 char *bitmap;
 int size; 
+int width;
+int hight;
 
 
 
@@ -26,12 +28,23 @@ void openfile(char *filename){
     fread(bitmap, 1, length, file);
     fclose(file);
 
+    //find the width and hight of the image
+    width = *(int *)&bitmap[18];
+    hight = *(int *)&bitmap[22];
+
+
+
+
+
 }
 
 int main(){
 
     openfile("bitmap.bmp");
     printf("Size of the file in bytes: %d\n", size);
+    printf("Width in pixels: %d\n", width);
+    printf("High in pixels: %d\n", hight);
+
     free(bitmap);
     return 0;   
 
