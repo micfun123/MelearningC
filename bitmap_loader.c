@@ -34,18 +34,11 @@ void openfile(char *filename){
     width = *(int32_t *)&bitmap[18];
     hight = *(int32_t *)&bitmap[22];
     bitdepth = *(int32_t *)&bitmap[28];
-
-
-
-
-
-
-
 }
 
 int main(){
 
-    openfile("bitmap.bmp");
+    openfile("dib16.bmp");
     printf("Size of the image: %d\n", size);
     printf("Width of the image: %d\n", width);
     printf("Hight of the image: %d\n", hight);
