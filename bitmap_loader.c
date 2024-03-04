@@ -9,6 +9,9 @@ int32_t size;
 int32_t width;
 int32_t hight;
 int32_t bitdepth;
+int32_t pixel_offset;
+int32_t totalpixels;
+
 
 
 
@@ -34,14 +37,27 @@ void openfile(char *filename){
     width = *(int32_t *)&bitmap[18];
     hight = *(int32_t *)&bitmap[22];
     bitdepth = *(int32_t *)&bitmap[28];
-    int pixel_offset = *(int32_t *)&bitmap[10];
-    //rgb for a 24 bit image
-    int r = *(uint8_t *)&bitmap[pixel_offset + 2];
-    int g = *(uint8_t *)&bitmap[pixel_offset + 1];
-    int b = *(uint8_t *)&bitmap[pixel_offset];
+    pixel_offset = *(int32_t *)&bitmap[10];
+    //find the brightness of the image
+    totalpixels = width * hight;
+    printf("Total pixels: %d\n", totalpixels);
+    long long int R = 0;
+    long long int G = 0;
+    long long int B = 0;
 
-    
-    printf("RGB values of the first pixel: %d, %d, %d\n", r, g, b);
+    for (int i = 0; i < totalpixels; i++){
+        int offset = pixel_offset + (i * 3);
+        int b = (unsigned char)bitmap[offset];
+        int g = (unsigned char)bitmap[offset + 1];
+        int r = (unsigned char)bitmap[offset + 2];
+        R += r;
+        G += g;
+        B += b;
+
+    }
+
+    float brightness = (R + G + B) / (totalpixels * 255 * 3.0);
+    printf("Brightness: %f\n", brightness);
 }
 
 int main(){
