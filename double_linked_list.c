@@ -83,4 +83,31 @@ int getNode(int index)
     return 0;
 }
 
+int findNode(int looking_for)
+{
+    struct node *current = head;
+    int count = 0;
+    while (current != NULL)
+    {
+        if(current -> data == looking_for){
+            return count;
+        }
+        count++;
+        current = current->next;
 
+    }
+    
+}
+
+void main(){
+    addNode(5);
+    addNode(2);
+    addNode(5);
+    addNode(6);
+    addNode(55);
+    addNode(77);
+    printf("%d\n",findNode(55));
+    printf("%d\n",findNode(77));
+    printf("%d\n",getNode(4));
+    printf("%d\n",getNode(5));
+}
