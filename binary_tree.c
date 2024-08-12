@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct node{
     int data;   
@@ -10,18 +11,34 @@ struct node{
 struct node *head = NULL;
 
 void addnode(int num){
-    if (head)
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    newNode -> data = num;
+    newNode -> left = NULL;
+    newNode -> right = NULL;
+    if (head == NULL)
     {
-        head ->data = num;
+        head = newNode;
         return;
     }
-    while(head != NULL){
-        if(num < head -> data){
-            head = head ->left;
-        }else
-        {
-            head = head ->right;
-        }        
+    struct node *current = head;
+    while(current != NULL){
+        if(num < current -> data){
+            if ( current -> left == NULL) 
+            {
+                current -> left = newNode;
+                break;
+            }
+            current = current -> left;
+        }
+        else if(num > current -> data){
+            if ( current -> right == NULL) 
+            {
+                current -> right = newNode;
+                break;
+            }
+            current = current -> right;
+                   
+        }
     }
 }
 
