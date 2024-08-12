@@ -42,6 +42,24 @@ void addnode(int num){
     }
 }
 
+//broken
+void findnode(int num){
+    struct node *current = head;
+    while(current != NULL){
+        if(current -> data == num){
+            printf("%d found.\n",num);
+            return;
+        }
+        if(current -> data < num){
+            current = current -> left;
+        }
+        else{
+            current = current -> right;
+        }
+    }
+    printf("%d does not exist\n",num);
+}
+
 void printtree(){
     struct node *temp = head;
     while(temp != NULL){
@@ -67,4 +85,9 @@ int main(){
     addnode(7);
     addnode(9);
     printtree();
+    findnode(9);
+    findnode(2);
+    findnode(5);
+    findnode(3);
+    findnode(4);
 }
