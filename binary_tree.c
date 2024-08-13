@@ -42,15 +42,15 @@ void addnode(int num){
     }
 }
 
-//broken
 void findnode(int num){
     struct node *current = head;
     while(current != NULL){
+        printf("%d\n", current -> data);
         if(current -> data == num){
             printf("%d found.\n",num);
             return;
         }
-        if(current -> data < num){
+        if(current -> data > num){
             current = current -> left;
         }
         else{
