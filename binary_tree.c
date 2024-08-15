@@ -5,74 +5,62 @@ struct node{
     int data;   
     struct node *left;
     struct node *right;
-
 };
 
 struct node *head = NULL;
 
 void addnode(int num){
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
-    newNode -> data = num;
-    newNode -> left = NULL;
-    newNode -> right = NULL;
+    newNode->data = num;
+    newNode->left = NULL;
+    newNode->right = NULL;
     if (head == NULL)
     {
         head = newNode;
         return;
     }
     struct node *current = head;
-    while(current != NULL){
-        if(num < current -> data){
-            if ( current -> left == NULL) 
-            {
-                current -> left = newNode;
+    while (current != NULL){
+        if (num < current->data){
+            if (current->left == NULL){
+                current->left = newNode;
                 break;
             }
-            current = current -> left;
+            current = current->left;
         }
-        else if(num > current -> data){
-            if ( current -> right == NULL) 
-            {
-                current -> right = newNode;
+        else if (num > current->data){
+            if (current->right == NULL){
+                current->right = newNode;
                 break;
             }
-            current = current -> right;
-                   
+            current = current->right;
         }
     }
 }
 
-void findnode(int num){
+void findnode(int num, struct node *head){
     struct node *current = head;
-    while(current != NULL){
-        if(current -> data == num){
-            printf("%d found.\n",num);
+    while (current != NULL){
+        if (current->data == num){
+            printf("%d found.\n", num);
             return;
         }
-        if(current -> data > num){
-            current = current -> left;
+        if (current->data > num){
+            current = current->left;
         }
         else{
-            current = current -> right;
+            current = current->right;
         }
     }
-    printf("%d does not exist\n",num);
+    printf("%d does not exist\n", num);
 }
 
-void printtree(){
-    struct node *temp = head;
-    while(temp != NULL){
-        printf("%d ", temp -> data);
-        temp = temp -> right;
-    }
-    printf("\n");
-    temp = head -> left;
-    while(temp != NULL){
-        printf("%d ", temp -> data);
-        temp = temp -> right;
-    }
-    printf("\n");
-
+void printtree(struct node *root){
+    if (root == NULL)
+        return;
+    printtree(root->left);
+    printf("%d ", root->data);
+    printtree(root->right);
 }
 
 int main(){
@@ -83,10 +71,14 @@ int main(){
     addnode(4);
     addnode(7);
     addnode(9);
-    printtree();
-    findnode(9);
-    findnode(2);
-    findnode(5);
-    findnode(3);
-    findnode(4);
+    
+    // Print the entire tree (in-order traversal)
+    printtree(head);
+    printf("\n");
+    
+    findnode(9, head);
+    findnode(2, head);
+    findnode(5, head);
+    findnode(30, head);
+    findnode(4, head);
 }
