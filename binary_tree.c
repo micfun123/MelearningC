@@ -9,32 +9,34 @@ struct node{
 
 struct node *head = NULL;
 
-void addnode(int num){
+void addnode(int num, struct node **root) {
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->data = num;
     newNode->left = NULL;
     newNode->right = NULL;
-    if (head == NULL)
+
+    if (*root == NULL)
     {
-        head = newNode;
+        *root = newNode;
         return;
     }
-    struct node *current = head;
-    while (current != NULL){
-        if (num < current->data){
-            if (current->left == NULL){
-                current->left = newNode;
-                break;
-            }
+
+    struct node  *current = *root;
+    struct node *parent = NULL;
+
+    while (current != NULL) {
+        parent = current;
+        if (num < current->data) {
             current = current->left;
-        }
-        else if (num > current->data){
-            if (current->right == NULL){
-                current->right = newNode;
-                break;
-            }
+        } else {
             current = current->right;
         }
+    }
+
+    if (num < parent->data) {
+        parent->left = newNode;
+    } else {
+        parent->right = newNode;
     }
 }
 
@@ -63,22 +65,23 @@ void printtree(struct node *root){
     printtree(root->right);
 }
 
+
+//pass in root node and string of new tree
+void dupetrue(struct node *root, struct node *new){
+    
+}
+
 int main(){
-    addnode(5);
-    addnode(3);
-    addnode(8);
-    addnode(2);
-    addnode(4);
-    addnode(7);
-    addnode(9);
+    addnode(5,&head);
+    addnode(15,&head);
+    addnode(20,&head);
+    addnode(53,&head);
+    addnode(30,&head);
     
     // Print the entire tree (in-order traversal)
     printtree(head);
     printf("\n");
+    findnode(5,head);
+    findnode(53,head);
     
-    findnode(9, head);
-    findnode(2, head);
-    findnode(5, head);
-    findnode(30, head);
-    findnode(4, head);
 }
