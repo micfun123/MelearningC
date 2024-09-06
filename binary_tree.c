@@ -65,10 +65,19 @@ void printtree(struct node *root){
     printtree(root->right);
 }
 
+void clonetree(struct node *old_tree, struct node **new_tree){
+    if(old_tree == NULL){
+        return;
+    }
 
-//pass in root node and string of new tree
-void dupetrue(struct node *root, struct node *new){
-    
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    newNode->data = old_tree->data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+
+    *new_tree = newNode;
+    clonetree(old_tree->left, &((*new_tree)->left));
+    clonetree(old_tree->right, &((*new_tree)->right));
 }
 
 int main(){
@@ -83,5 +92,8 @@ int main(){
     printf("\n");
     findnode(5,head);
     findnode(53,head);
+    struct node *newish = NULL;
+    clonetree(head, &newish);
+    printtree(newish);
     
 }
